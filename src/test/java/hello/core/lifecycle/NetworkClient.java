@@ -1,5 +1,8 @@
 package hello.core.lifecycle;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
+
 // InitializingBean, DisposableBean은 스프링 초창기에 나온 방법으로
 // 외부 라이브러링에는 적용 불가하기 때문에 지금은 거의 사용하지 않음
 public class NetworkClient {
@@ -28,6 +31,7 @@ public class NetworkClient {
     }
 
     // 의존관계 주입이 끝나면 호출됨
+    @PostConstruct
     public void init() throws Exception {
         System.out.println("NetworkClient.init");
         connect();
@@ -35,6 +39,7 @@ public class NetworkClient {
     }
 
     // Bean이 종료될 때 호출됨(컨테이너 종료 시점)
+    @PreDestroy
     public void close() throws Exception {
         System.out.println("NetworkClient.close");
         disconnect();
